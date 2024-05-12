@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw6070xlo0fof"]
+
+[ext_resource type="Texture2D" uid="uid://bbjyalxuruqto" path="res://assets/Bg.png" id="1_cbf2a"]
+[ext_resource type="Script" path="res://scripts/MainScene.gd" id="2_oso40"]
+[ext_resource type="PackedScene" uid="uid://bknqc8bxqcpft" path="res://scenes/scores.tscn" id="3_3vmun"]
+[ext_resource type="PackedScene" uid="uid://wd8pmu0p26e" path="res://scenes/Player.tscn" id="3_pcsr1"]
+[ext_resource type="PackedScene" uid="uid://dgixilcxp0vhq" path="res://scenes/ball.tscn" id="4_i7rop"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpt6j"]
+size = Vector2(1152, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxx7a"]
+size = Vector2(1152, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lljr5"]
+size = Vector2(64, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g77xx"]
+size = Vector2(64, 648)
+
+[node name="MainScene" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_cbf2a")
+centered = false
+script = ExtResource("2_oso40")
+player_scene = ExtResource("3_pcsr1")
+
+[node name="Border" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Border"]
+position = Vector2(576, -32)
+shape = SubResource("RectangleShape2D_jpt6j")
+
+[node name="Bottom" type="CollisionShape2D" parent="Border"]
+position = Vector2(576, 676)
+shape = SubResource("RectangleShape2D_bxx7a")
+
+[node name="ScoreRight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreRight" groups=["Main"]]
+position = Vector2(1184, 322)
+shape = SubResource("RectangleShape2D_lljr5")
+
+[node name="ScoreLeft" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreLeft"]
+position = Vector2(-32, 322)
+shape = SubResource("RectangleShape2D_g77xx")
+
+[node name="Scores" parent="." instance=ExtResource("3_3vmun")]
+
+[node name="Ball" parent="." instance=ExtResource("4_i7rop")]
+position = Vector2(576, 317)
+
+[node name="SpawnLocations" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="SpawnLocations" groups=["SpawnLocation"]]
+position = Vector2(50, 324)
+
+[node name="1" type="Node2D" parent="SpawnLocations" groups=["SpawnLocation"]]
+position = Vector2(1102, 324)
+
+[connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right_body_entered"]
+[connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left_body_entered"]

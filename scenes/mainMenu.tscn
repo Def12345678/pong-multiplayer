@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://biem4fxk04034"]
+
+[ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_gx8p3"]
+
+[node name="MainMenu" type="Control" groups=["Main"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gx8p3")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 520.0
+offset_right = 60.0
+offset_bottom = 551.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 560.0
+offset_right = 54.0
+offset_bottom = 591.0
+text = "Join"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 600.0
+offset_right = 58.0
+offset_bottom = 631.0
+text = "Quit"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 424.0
+offset_right = 216.0
+offset_bottom = 455.0
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 520.0
+offset_right = 200.0
+offset_bottom = 551.0
+text = "Start Game"
+
+[node name="address" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 424.0
+offset_right = 464.0
+offset_bottom = 455.0
+
+[node name="port" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 424.0
+offset_right = 584.0
+offset_bottom = 455.0
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="text_submitted" from="address" to="." method="_on_address_text_submitted"]
+[connection signal="text_submitted" from="port" to="." method="_on_port_text_submitted"]
